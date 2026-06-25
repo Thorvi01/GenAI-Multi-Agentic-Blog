@@ -1,6 +1,6 @@
-# <a href="https://kalyanm45.github.io/BlogBoard-AI-Blog-Generator/">BlogBoard — Autonomous AI Article Generator</a>
+# <a href="https://Thorvi01.github.io/BlogBoard-AI-Blog-Generator/">BlogBoard — Autonomous AI Article Generator</a>
 
-<p align="center"> <img src="https://img.shields.io/github/license/KalyanM45/BlogBoard-AI-Blog-Generator?style=ROUND" alt="License" /> <img src="https://img.shields.io/github/stars/KalyanM45/BlogBoard-AI-Blog-Generator?style=ROUND" alt="Stars" /> <img src="https://img.shields.io/github/forks/KalyanM45/BlogBoard-AI-Blog-Generator?style=ROUND" alt="Forks" /> <img src="https://img.shields.io/github/issues/KalyanM45/BlogBoard-AI-Blog-Generator?style=ROUND"alt="Issues" />
+<p align="center"> <img src="https://img.shields.io/github/license/Thorvi01/BlogBoard-AI-Blog-Generator?style=ROUND" alt="License" /> <img src="https://img.shields.io/github/stars/Thorvi01/BlogBoard-AI-Blog-Generator?style=ROUND" alt="Stars" /> <img src="https://img.shields.io/github/forks/Thorvi01/BlogBoard-AI-Blog-Generator?style=ROUND" alt="Forks" /> <img src="https://img.shields.io/github/issues/Thorvi01/BlogBoard-AI-Blog-Generator?style=ROUND"alt="Issues" />
 </p>
 
 ## About The Project
@@ -33,7 +33,7 @@ Follow these steps to install and set up the project directly from the GitHub re
    - Navigate to the directory where you want to install the project.
    - Run the following command to clone the GitHub repository:
      ```bash
-     git clone https://github.com/KalyanM45/BlogBoard-AI-Blog-Generator.git
+     git clone https://github.com/Thorvi01/BlogBoard-AI-Blog-Generator.git
      ```
 
 2. **Create a Virtual Environment** (Recommended)

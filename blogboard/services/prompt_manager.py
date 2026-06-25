@@ -36,3 +36,4 @@ class PromptManager:
         return fallback_prompt.format(**kwargs)
 
 prompt_manager = PromptManager()
+

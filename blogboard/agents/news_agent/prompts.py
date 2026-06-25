@@ -12,3 +12,4 @@ Your task is to synthesize the extracted context above into a cohesive, highly e
 Focus on factual accuracy, properly summarizing the facts from the search context.
 Use a professional journalism tone, appropriate headers, and bold critical terms. Do not include a markdown codeblock around your entire response.
 """
+

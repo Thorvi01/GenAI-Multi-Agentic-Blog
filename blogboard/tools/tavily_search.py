@@ -80,3 +80,4 @@ class TavilySearchTool(BaseTool):
             return f"Tavily search API request failed: {str(e)}"
         except Exception as e:
             return f"An unexpected error occurred during Tavily search: {str(e)}"
+

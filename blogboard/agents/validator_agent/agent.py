@@ -106,3 +106,4 @@ def validator_node(state: BlogState) -> BlogState:
         "slug": slug_value,
         "md_path": f"r2://{md_relative}"
     }
+

@@ -96,3 +96,4 @@ class R2StorageService:
                 sorted_articles = sorted(articles, key=lambda x: x.get("date", ""), reverse=True)
                 latest_dates[domain_slug] = sorted_articles[0].get("date", "Unknown")
         return latest_dates
+
