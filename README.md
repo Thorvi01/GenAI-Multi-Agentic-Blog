@@ -1,119 +1,203 @@
-# <a href="https://Thorvi01.github.io/BlogBoard-AI-Blog-Generator/">BlogBoard â€” Autonomous AI Article Generator</a>
+<div align="center">
 
-<p align="center"> <img src="https://img.shields.io/github/license/Thorvi01/BlogBoard-AI-Blog-Generator?style=ROUND" alt="License" /> <img src="https://img.shields.io/github/stars/Thorvi01/BlogBoard-AI-Blog-Generator?style=ROUND" alt="Stars" /> <img src="https://img.shields.io/github/forks/Thorvi01/BlogBoard-AI-Blog-Generator?style=ROUND" alt="Forks" /> <img src="https://img.shields.io/github/issues/Thorvi01/BlogBoard-AI-Blog-Generator?style=ROUND"alt="Issues" />
-</p>
+# ?? GenAI Multi-Agentic Blog Generation
 
-## About The Project
+### An autonomous blog generation system powered by a self-correcting multi-agent pipeline
 
-BlogBoard is an end-to-end, fully automated blogging platform. It autonomously schedules, writes, formats, and publishes deep-dive technical articles on Machine Learning and Artificial Intelligence directly to a fast, static frontend website.
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![LangGraph](https://img.shields.io/badge/LangGraph-Agentic%20Pipelines-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)](https://langchain-ai.github.io/langgraph/)
+[![LangChain](https://img.shields.io/badge/LangChain-Tools%20%26%20LLMs-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)](https://langchain.com)
+[![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com)
+[![Tavily](https://img.shields.io/badge/Tavily-Web%20Search-FF6B35?style=for-the-badge)](https://tavily.com)
 
-Powered by **LangGraph** for stateful workflow execution and **Groq** for blazing-fast LLM inference, it ensures that high-quality, zero-fluff, production-grade articles are generated and deployed automatically via **GitHub Actions**.
+</div>
 
-## Library Requirements
+---
 
- - Python 3.12+
- - langgraph>=0.2.20
- - groq>=0.11.0
- - python-dotenv>=1.0.1
- - uv (for dependency management)
+## ?? What is this?
 
-## Getting Started
+Most AI writing tools generate content in a **single pass** — one prompt, one output. This system works differently.
 
-This will help you understand how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+**GenAI Multi-Agentic Blog** uses a team of specialized AI agents that collaborate, just like a real editorial team:
 
-## Installation Steps
+- ?? A **Research Agent** searches the live web for relevant, up-to-date information
+- ?? A **Writing Agent** drafts a full, structured blog post from the research
+- ? A **Validator Agent** reviews the draft — and if it is not good enough, sends it back for revision **automatically**
 
-### Installation from GitHub
+No human in the loop. No single-shot prompting. Just agents doing their jobs.
 
-Follow these steps to install and set up the project directly from the GitHub repository:
+---
 
-1. **Clone the Repository**
-   - Open your terminal or command prompt.
-   - Navigate to the directory where you want to install the project.
-   - Run the following command to clone the GitHub repository:
-     ```bash
-     git clone https://github.com/Thorvi01/BlogBoard-AI-Blog-Generator.git
-     ```
+## ??? System Architecture+-----------------------------+
+                    ¦           START              ¦
+                    +-----------------------------+
+                                   ¦
+               +-------------------+-------------------+
+               ¦ domain == ainews  ¦                   ¦ domain == tutorial
+               ?                  ¦                   ?
+      +-----------------+         ¦        +----------------------+
+      ¦   News Agent    ¦         ¦        ¦   Tutorial Agent     ¦
+      ¦  - Web search   ¦         ¦        ¦  - Concept research  ¦
+      ¦  - Summarize    ¦         ¦        ¦  - Step-by-step doc  ¦
+      +-----------------+         ¦        +----------------------+
+               ¦                  ¦                   ¦
+               +------------------+-------------------+
+                                  ?
+                      +-----------------------+
+                      ¦    Validator Agent     ¦
+                      ¦  - Quality check       ¦
+                      ¦  - Structure review    ¦
+                      ¦  - Factual grounding   ¦
+                      +-----------------------+
+                                  ¦
+                +------------------------------------+
+                ¦ APPROVED                  REJECTED  ¦
+                ?                                     ?
+              END ?              Loop back with feedback ??Built on **LangGraph StateGraph** with conditional routing and **InMemorySaver** checkpointing for state persistence across revision loops.
 
-2. **Create a Virtual Environment** (Recommended)
-   - It's a good practice to create a virtual environment to manage project dependencies. Run the following command:
-     ```bash
-     uv venv
-     ```
+---
 
-3. **Activate the Virtual Environment**
-   - Activate the virtual environment based on your operating system:
-       ```bash
-       # On Linux/Mac:
-       source .venv/bin/activate
-       # On Windows:
-       .venv\Scripts\activate
-       ```
+## ? Key Features
 
-4. **Install Dependencies**
-   - Navigate to the project directory:
-     ```bash
-     cd BlogBoard-AI-Blog-Generator
-     ```
-   - Run the following command to install project dependencies:
-     ```bash
-     uv pip install -r backend/requirements.txt
-     ```
+| Feature | Description |
+|---------|-------------|
+| ?? **Self-Correcting Loop** | Validator rejects low-quality drafts and routes them back automatically |
+| ?? **Live Web Research** | Agents search the web in real-time via Tavily and Guardian APIs |
+| ?? **Conditional Routing** | Graph dynamically picks the right agent based on content domain |
+| ?? **Modular Agents** | Each agent has its own prompts, tools, and logic — easy to extend |
+| ?? **Stateful Pipeline** | LangGraph checkpointing persists state across the full revision cycle |
+| ??? **Web Frontend** | Generated blogs are published to a clean, browsable web interface |
 
-5. **Run the Project**
-   - Start the backend pipeline by running the appropriate command:
-     ```bash
-     python backend/run.py
-     ```
+---
 
-6. **Access the Project**
-   - Serve the frontend locally using Python's built-in HTTP server:
-     ```bash
-     python -m http.server 8000 --directory frontend
-     ```
-   - Open a web browser and navigate to `http://localhost:8000`.
+## ??? Tech Stack
 
+| Layer | Technology |
+|-------|------------|
+| **Agent Orchestration** | LangGraph, LangChain |
+| **LLM** | OpenAI GPT-4 (configurable) |
+| **Web Search** | Tavily Search API, The Guardian API |
+| **State Management** | LangGraph InMemorySaver |
+| **Configuration** | Pydantic Settings |
+| **Frontend** | HTML, CSS, JavaScript |
+| **Package Manager** | uv |
 
-## API Key Setup
+---
 
-To use this project, you need an API key from Groq to power the Large Language Model inference. Follow these steps to obtain and set up your API key:
+## ?? Project Structureblogboard/
 
-1. **Get API Key:**
-   - Visit the Groq Console at [console.groq.com](https://console.groq.com/).
-   - Follow the instructions to create an account and obtain your API key.
++-- agents/
 
-2. **Set Up API Key:**
-   - Create a file named `.env` in the project root.
-   - Add your API key to the `.env` file:
-     ```dotenv
-     GROQ_API_KEY=your_api_key_here
-     ```
+¦   +-- news_agent/           # Researches live web and writes AI news posts
 
-   **Note:** Keep your API key confidential. Do not share it publicly or expose it in your code.<br>
+¦   ¦   +-- agent.py          # Agent logic with 2-step: research then generate
 
-## Contributing
+¦   ¦   +-- prompts.py        # News-specific prompt templates
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+¦   +-- tutorial_agent/       # Writes structured technical tutorials
 
-â€¢ **Report bugs**: If you encounter any bugs, please let us know. Open up an issue and let us know the problem.
+¦   +-- validator_agent/      # Enforces quality, routes rejections with feedback
 
-â€¢ **Contribute code**: If you are a developer and want to contribute, follow the instructions below to get started!
+¦
 
-1. Fork the Project
-2. Create your Feature Branch
-3. Commit your Changes
-4. Push to the Branch
-5. Open a Pull Request
++-- graph/
 
-â€¢ **Suggestions**: If you don't want to code but have some awesome ideas, open up an issue explaining some updates or improvements you would like to see!
+¦   +-- graph.py              # LangGraph StateGraph — routing and compilation
 
-#### Don't forget to give the project a star! Thanks again!
+¦   +-- state.py              # Shared BlogState schema across all agents
 
-## License
+¦
 
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) - see the [LICENSE](LICENSE) file for details.<br>
++-- services/
 
-## Acknowledgements
+¦   +-- llm.py                # LLM service abstraction layer
 
-We'd like to extend our gratitude to all individuals and organizations who have played a role in the development and success of this project. Your support, whether through contributions, inspiration, or encouragement, has been invaluable. Thank you for being a part of our journey.
+¦   +-- prompt_manager.py     # Centralized prompt loading and management
+
+¦   +-- storage.py            # Blog post persistence to disk
+
+¦
+
++-- tools/
+
+¦   +-- tavily_search.py      # Tavily real-time web search tool
+
+¦   +-- guardian_search.py    # Guardian News API search tool
+
+¦
+
++-- web/                      # Static frontend blog viewer
+
+¦   +-- blogs/                # Generated markdown blog posts by category
+
+¦   +-- js / css / html       # Frontend assets
+
+¦
+
++-- run.py                    # Pipeline entry point
+
+---
+
+## ?? Getting Started
+
+### Prerequisites
+- Python 3.11+
+- API keys for OpenAI, Tavily, and Guardian
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/Thorvi01/GenAI-Multi-Agentic-Blog.git
+cd GenAI-Multi-Agentic-Blog
+```
+
+### 2. Configure environment
+```bash
+cp .env.example .env
+```
+Add your keys to `.env`:
+```env
+OPENAI_API_KEY=your_key_here
+TAVILY_API_KEY=your_key_here
+GUARDIAN_API_KEY=your_key_here
+```
+
+### 3. Install dependencies
+```bash
+pip install uv
+uv sync
+```
+
+### 4. Run the pipeline
+```bash
+python -m blogboard.run
+```
+
+Generated blogs appear in `blogboard/web/blogs/` and are viewable in the frontend.
+
+---
+
+## ?? Design Decisions
+
+**Why LangGraph over a simple LLM chain?**
+> LangGraph supports stateful, cyclic execution — essential for the validator revision loop. A linear chain cannot loop back; LangGraph conditional edges make this natural.
+
+**Why separate agents per domain?**
+> News and tutorials require fundamentally different research strategies, tone, and structure. Separate agents keep prompts focused and output quality consistently high.
+
+**Why a validator agent instead of just better prompts?**
+> Single-pass generation produces inconsistent quality. A dedicated validator with explicit rubrics enforces structure, tone, and factual grounding on every run — acting as a safety net regardless of input variability.
+
+---
+
+## ?? Contributing
+
+Contributions are welcome! Open an issue or submit a pull request to:
+- Add new agent types (e.g. summarizer, SEO optimizer)
+- Support additional LLM providers (Anthropic, Groq, Mistral)
+- Improve the web frontend
+
+---
+
+<div align="center">
+Built with ?? LangGraph · ?? LangChain · ?? Tavily
+</div>
