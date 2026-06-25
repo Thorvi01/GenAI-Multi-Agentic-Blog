@@ -20,9 +20,9 @@ Most AI writing tools generate content in a **single pass** — one prompt, one 
 
 **GenAI Multi-Agentic Blog** uses a team of specialized AI agents that collaborate, just like a real editorial team:
 
-- ?? A **Research Agent** searches the live web for relevant, up-to-date information
-- ?? A **Writing Agent** drafts a full, structured blog post from the research
-- ? A **Validator Agent** reviews the draft — and if it is not good enough, sends it back for revision **automatically**
+-  A **Research Agent** searches the live web for relevant, up-to-date information
+-  A **Writing Agent** drafts a full, structured blog post from the research
+-  A **Validator Agent** reviews the draft — and if it is not good enough, sends it back for revision **automatically**
 
 No human in the loop. No single-shot prompting. Just agents doing their jobs.
 
