@@ -1,6 +1,6 @@
 <div align="center">
 
-# ?? GenAI Multi-Agentic Blog Generation
+# GenAI Multi-Agentic Blog Generation
 
 ### An autonomous blog generation system powered by a self-correcting multi-agent pipeline
 
@@ -14,59 +14,59 @@
 
 ---
 
-## ?? What is this?
+## What is this?
 
-Most AI writing tools generate content in a **single pass** — one prompt, one output. This system works differently.
+Most AI writing tools generate content in a **single pass** â€” one prompt, one output. This system works differently.
 
 **GenAI Multi-Agentic Blog** uses a team of specialized AI agents that collaborate, just like a real editorial team:
 
 - ?? A **Research Agent** searches the live web for relevant, up-to-date information
 - ?? A **Writing Agent** drafts a full, structured blog post from the research
-- ? A **Validator Agent** reviews the draft — and if it is not good enough, sends it back for revision **automatically**
+- ? A **Validator Agent** reviews the draft â€” and if it is not good enough, sends it back for revision **automatically**
 
 No human in the loop. No single-shot prompting. Just agents doing their jobs.
 
 ---
 
-## ??? System Architecture+-----------------------------+
-                    ¦           START              ¦
+## System Architecture+-----------------------------+
+                    Â¦           START              Â¦
                     +-----------------------------+
-                                   ¦
+                                   Â¦
                +-------------------+-------------------+
-               ¦ domain == ainews  ¦                   ¦ domain == tutorial
-               ?                  ¦                   ?
-      +-----------------+         ¦        +----------------------+
-      ¦   News Agent    ¦         ¦        ¦   Tutorial Agent     ¦
-      ¦  - Web search   ¦         ¦        ¦  - Concept research  ¦
-      ¦  - Summarize    ¦         ¦        ¦  - Step-by-step doc  ¦
-      +-----------------+         ¦        +----------------------+
-               ¦                  ¦                   ¦
+               Â¦ domain == ainews  Â¦                   Â¦ domain == tutorial
+               ?                  Â¦                   ?
+      +-----------------+         Â¦        +----------------------+
+      Â¦   News Agent    Â¦         Â¦        Â¦   Tutorial Agent     Â¦
+      Â¦  - Web search   Â¦         Â¦        Â¦  - Concept research  Â¦
+      Â¦  - Summarize    Â¦         Â¦        Â¦  - Step-by-step doc  Â¦
+      +-----------------+         Â¦        +----------------------+
+               Â¦                  Â¦                   Â¦
                +------------------+-------------------+
                                   ?
                       +-----------------------+
-                      ¦    Validator Agent     ¦
-                      ¦  - Quality check       ¦
-                      ¦  - Structure review    ¦
-                      ¦  - Factual grounding   ¦
+                      Â¦    Validator Agent     Â¦
+                      Â¦  - Quality check       Â¦
+                      Â¦  - Structure review    Â¦
+                      Â¦  - Factual grounding   Â¦
                       +-----------------------+
-                                  ¦
+                                  Â¦
                 +------------------------------------+
-                ¦ APPROVED                  REJECTED  ¦
+                Â¦ APPROVED                  REJECTED  Â¦
                 ?                                     ?
               END ?              Loop back with feedback ??Built on **LangGraph StateGraph** with conditional routing and **InMemorySaver** checkpointing for state persistence across revision loops.
 
 ---
 
-## ? Key Features
+## Key Features
 
 | Feature | Description |
 |---------|-------------|
-| ?? **Self-Correcting Loop** | Validator rejects low-quality drafts and routes them back automatically |
-| ?? **Live Web Research** | Agents search the web in real-time via Tavily and Guardian APIs |
-| ?? **Conditional Routing** | Graph dynamically picks the right agent based on content domain |
-| ?? **Modular Agents** | Each agent has its own prompts, tools, and logic — easy to extend |
-| ?? **Stateful Pipeline** | LangGraph checkpointing persists state across the full revision cycle |
-| ??? **Web Frontend** | Generated blogs are published to a clean, browsable web interface |
+|  **Self-Correcting Loop** | Validator rejects low-quality drafts and routes them back automatically |
+|  **Live Web Research** | Agents search the web in real-time via Tavily and Guardian APIs |
+|  **Conditional Routing** | Graph dynamically picks the right agent based on content domain |
+|  **Modular Agents** | Each agent has its own prompts, tools, and logic â€” easy to extend |
+|  **Stateful Pipeline** | LangGraph checkpointing persists state across the full revision cycle |
+|  **Web Frontend** | Generated blogs are published to a clean, browsable web interface |
 
 ---
 
@@ -84,61 +84,61 @@ No human in the loop. No single-shot prompting. Just agents doing their jobs.
 
 ---
 
-## ?? Project Structureblogboard/
+##  Project Structureblogboard/
 
 +-- agents/
 
-¦   +-- news_agent/           # Researches live web and writes AI news posts
+Â¦   +-- news_agent/           # Researches live web and writes AI news posts
 
-¦   ¦   +-- agent.py          # Agent logic with 2-step: research then generate
+Â¦   Â¦   +-- agent.py          # Agent logic with 2-step: research then generate
 
-¦   ¦   +-- prompts.py        # News-specific prompt templates
+Â¦   Â¦   +-- prompts.py        # News-specific prompt templates
 
-¦   +-- tutorial_agent/       # Writes structured technical tutorials
+Â¦   +-- tutorial_agent/       # Writes structured technical tutorials
 
-¦   +-- validator_agent/      # Enforces quality, routes rejections with feedback
+Â¦   +-- validator_agent/      # Enforces quality, routes rejections with feedback
 
-¦
+Â¦
 
 +-- graph/
 
-¦   +-- graph.py              # LangGraph StateGraph — routing and compilation
+Â¦   +-- graph.py              # LangGraph StateGraph â€” routing and compilation
 
-¦   +-- state.py              # Shared BlogState schema across all agents
+Â¦   +-- state.py              # Shared BlogState schema across all agents
 
-¦
+Â¦
 
 +-- services/
 
-¦   +-- llm.py                # LLM service abstraction layer
+Â¦   +-- llm.py                # LLM service abstraction layer
 
-¦   +-- prompt_manager.py     # Centralized prompt loading and management
+Â¦   +-- prompt_manager.py     # Centralized prompt loading and management
 
-¦   +-- storage.py            # Blog post persistence to disk
+Â¦   +-- storage.py            # Blog post persistence to disk
 
-¦
+Â¦
 
 +-- tools/
 
-¦   +-- tavily_search.py      # Tavily real-time web search tool
+Â¦   +-- tavily_search.py      # Tavily real-time web search tool
 
-¦   +-- guardian_search.py    # Guardian News API search tool
+Â¦   +-- guardian_search.py    # Guardian News API search tool
 
-¦
+Â¦
 
 +-- web/                      # Static frontend blog viewer
 
-¦   +-- blogs/                # Generated markdown blog posts by category
+Â¦   +-- blogs/                # Generated markdown blog posts by category
 
-¦   +-- js / css / html       # Frontend assets
+Â¦   +-- js / css / html       # Frontend assets
 
-¦
+Â¦
 
 +-- run.py                    # Pipeline entry point
 
 ---
 
-## ?? Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Python 3.11+
@@ -176,20 +176,20 @@ Generated blogs appear in `blogboard/web/blogs/` and are viewable in the fronten
 
 ---
 
-## ?? Design Decisions
+##  Design Decisions
 
 **Why LangGraph over a simple LLM chain?**
-> LangGraph supports stateful, cyclic execution — essential for the validator revision loop. A linear chain cannot loop back; LangGraph conditional edges make this natural.
+> LangGraph supports stateful, cyclic execution â€” essential for the validator revision loop. A linear chain cannot loop back; LangGraph conditional edges make this natural.
 
 **Why separate agents per domain?**
 > News and tutorials require fundamentally different research strategies, tone, and structure. Separate agents keep prompts focused and output quality consistently high.
 
 **Why a validator agent instead of just better prompts?**
-> Single-pass generation produces inconsistent quality. A dedicated validator with explicit rubrics enforces structure, tone, and factual grounding on every run — acting as a safety net regardless of input variability.
+> Single-pass generation produces inconsistent quality. A dedicated validator with explicit rubrics enforces structure, tone, and factual grounding on every run â€” acting as a safety net regardless of input variability.
 
 ---
 
-## ?? Contributing
+##  Contributing
 
 Contributions are welcome! Open an issue or submit a pull request to:
 - Add new agent types (e.g. summarizer, SEO optimizer)
@@ -199,5 +199,5 @@ Contributions are welcome! Open an issue or submit a pull request to:
 ---
 
 <div align="center">
-Built with ?? LangGraph · ?? LangChain · ?? Tavily
+Built with  LangGraph Â·  LangChain Â·  Tavily
 </div>
